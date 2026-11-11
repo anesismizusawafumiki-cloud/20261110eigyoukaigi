@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>11月度営業会議ダイジェスト</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;600;700&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Layout: house-style digest — masthead, 4 stat tiles, decisions, dept cards, opportunities table, to-do list */
+  :root {
+    --ground: #F5F7FB; --surface: #FFFFFF; --surface-soft: #EEF2FA;
+    --ink: #1F2937; --ink-soft: #5B6472; --ink-faint: #8B93A1; --line: #E2E7F0;
+    --accent: #2653D6; --accent-deep: #16234F; --accent-soft: #E7EDFC;
+    --good: #157A45; --good-soft: #E4F5EA; --warn: #B4670A; --warn-soft: #FBF0DE;
+    --bad: #C22A2A; --bad-soft: #FBE8E8; --neutral: #6B7280; --neutral-soft: #EEF0F3;
+    --shadow: 0 1px 2px rgba(22, 35, 79, 0.06), 0 8px 24px -12px rgba(22, 35, 79, 0.18);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #10131C; --surface: #181C28; --surface-soft: #1E2432;
+      --ink: #E7EAF2; --ink-soft: #A7AEBD; --ink-faint: #737C8F; --line: #2A3040;
+      --accent: #6C8CF5; --accent-deep: #DCE4FB; --accent-soft: #202A47;
+      --good: #4ADE8B; --good-soft: #17301F; --warn: #F0A93F; --warn-soft: #332409;
+      --bad: #F27272; --bad-soft: #351A1A; --neutral: #9099A9; --neutral-soft: #232838;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 28px -14px rgba(0, 0, 0, 0.55);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #10131C; --surface: #181C28; --surface-soft: #1E2432;
+    --ink: #E7EAF2; --ink-soft: #A7AEBD; --ink-faint: #737C8F; --line: #2A3040;
+    --accent: #6C8CF5; --accent-deep: #DCE4FB; --accent-soft: #202A47;
+    --good: #4ADE8B; --good-soft: #17301F; --warn: #F0A93F; --warn-soft: #332409;
+    --bad: #F27272; --bad-soft: #351A1A; --neutral: #9099A9; --neutral-soft: #232838;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 28px -14px rgba(0, 0, 0, 0.55);
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    font-size: 15px; line-height: 1.75; -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 880px; margin: 0 auto;
+    padding-block: 40px 80px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  h1, h2, h3 { font-family: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", sans-serif; text-wrap: balance; color: var(--ink); margin: 0; }
+  .num { font-family: "Inter", "Noto Sans JP", sans-serif; font-variant-numeric: tabular-nums; }
+
+  .masthead { display: flex; flex-direction: column; gap: 14px; padding-bottom: 28px; margin-bottom: 28px; border-bottom: 1px solid var(--line); }
+  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: var(--accent); }
+  .masthead h1 { font-size: 30px; font-weight: 700; letter-spacing: 0.01em; }
+  .masthead .sub { color: var(--ink-soft); font-size: 14.5px; margin: 0; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+  .meta-chip { display: inline-flex; align-items: center; gap: 6px; background: var(--surface-soft); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 13px; color: var(--ink-soft); }
+  .meta-chip b { color: var(--ink); font-weight: 600; }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 40px; }
+  .stat-tile { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 16px 14px; box-shadow: var(--shadow); min-width: 0; }
+  .stat-tile .label { font-size: 12px; color: var(--ink-faint); margin-bottom: 8px; letter-spacing: 0.02em; }
+  .stat-tile .value { font-size: 22px; font-weight: 700; color: var(--ink); line-height: 1.2; }
+  .stat-tile .value.accent { color: var(--accent); }
+  .stat-tile .value.warn { color: var(--warn); }
+  .stat-tile .value.bad { color: var(--bad); }
+  .stat-tile .note { font-size: 12px; color: var(--ink-faint); margin-top: 4px; }
+
+  section { margin-bottom: 40px; }
+  .section-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; }
+  .section-head .idx { font-family: "Inter", sans-serif; font-size: 13px; font-weight: 700; color: var(--accent); background: var(--accent-soft); border-radius: 6px; padding: 2px 8px; }
+  .section-head h2 { font-size: 19px; font-weight: 700; }
+  .lede { color: var(--ink-soft); font-size: 14px; margin: -8px 0 18px; }
+
+  .dept-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .dept-card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 18px 16px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .dept-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .dept-name { font-weight: 700; font-size: 15px; }
+  .pill { font-size: 11.5px; font-weight: 700; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
+  .pill.good { background: var(--good-soft); color: var(--good); }
+  .pill.warn { background: var(--warn-soft); color: var(--warn); }
+  .pill.bad { background: var(--bad-soft); color: var(--bad); }
+  .pill.neutral { background: var(--neutral-soft); color: var(--neutral); }
+  .dept-card ul { margin: 0; padding-left: 1.2em; font-size: 13.5px; color: var(--ink-soft); line-height: 1.7; }
+
+  .notice-list { display: flex; flex-direction: column; gap: 10px; }
+  .notice { display: grid; grid-template-columns: 88px 1fr; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; box-shadow: var(--shadow); }
+  .notice .tag { font-size: 11.5px; font-weight: 700; color: var(--accent); background: var(--accent-soft); border-radius: 6px; padding: 4px 8px; text-align: center; height: fit-content; }
+  .notice .body-text { font-size: 13.5px; color: var(--ink); min-width: 0; }
+  .notice .body-text .sub { color: var(--ink-soft); font-size: 12.5px; display: block; margin-top: 3px; }
+
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface); }
+  th, td { padding: 10px 14px; text-align: left; vertical-align: top; }
+  td:first-child { white-space: nowrap; font-weight: 600; }
+  td.due { white-space: nowrap; font-family: "Inter", "Noto Sans JP", sans-serif; font-variant-numeric: tabular-nums; }
+  thead th { background: var(--surface-soft); color: var(--ink-soft); font-weight: 600; font-size: 12px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  tbody tr:not(:last-child) td { border-bottom: 1px solid var(--line); }
+  td.note-cell { color: var(--ink-soft); }
+
+  footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--ink-faint); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  @media (max-width: 720px) {
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .dept-grid { grid-template-columns: 1fr; }
+    .notice { grid-template-columns: 1fr; }
+    .notice .tag { width: fit-content; }
+    .masthead h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="masthead">
+    <span class="eyebrow">株式会社アネシス &nbsp;/&nbsp; 営業会議ダイジェスト</span>
+    <h1>2026年11月度 営業会議 ダイジェスト</h1>
+    <p class="sub">議事録の要点をまとめた社内共有版です。詳細は議事録をご参照ください。</p>
+    <div class="meta-row">
+      <span class="meta-chip">🗓 <b>2026年11月10日(火)</b> 15:43〜16:18</span>
+      <span class="meta-chip">📍 <b>渋谷本社</b> ＋ オンライン</span>
+      <span class="meta-chip">👥 水澤（進行）・浅田・金子・久保木・吉田</span>
+    </div>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-tile">
+      <div class="label">10月の訪問件数</div>
+      <div class="value accent num">35<span style="font-size:14px;">件</span></div>
+      <div class="note">Gridy報告は30件（差 約5件）</div>
+    </div>
+    <div class="stat-tile">
+      <div class="label">鳥貴族 天井点検</div>
+      <div class="value warn num">6〜7<span style="font-size:14px;">割</span></div>
+      <div class="note">約350店舗・11月に持ち越し</div>
+    </div>
+    <div class="stat-tile">
+      <div class="label">次回の入力締切</div>
+      <div class="value bad num">12/9<span style="font-size:14px;"> 13時</span></div>
+      <div class="note">集計日 12月10日</div>
+    </div>
+    <div class="stat-tile">
+      <div class="label">遠隔支援 説明会</div>
+      <div class="value num">11/17<span style="font-size:14px;"> 14時</span></div>
+      <div class="note">オンライン参加可</div>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-head"><span class="idx">01</span><h2>決定事項</h2></div>
+    <div class="notice-list">
+      <div class="notice">
+        <span class="tag">記録ルール</span>
+        <div class="body-text">
+          <b>Gridyに詳しく入力</b>し、営業活動リストには<b>一言メモのみ</b>記載する。今回から適用。
+          <span class="sub">Gridyは全員が閲覧できるため、内容はGridyに集約。両方を照合して漏れを防ぎます。</span>
+        </div>
+      </div>
+      <div class="notice">
+        <span class="tag">育成</span>
+        <div class="body-text">
+          若手3名に、新しい期（<b>2027年2月</b>）から年間約<b>1,000万円</b>規模の顧客を<b>2社ずつ</b>担当してもらう。
+          <span class="sub">年内にカレンダー配布で顔合わせ → 2月に正式に担当交代。上司が後ろからフォローします。</span>
+        </div>
+      </div>
+      <div class="notice">
+        <span class="tag">営業方針</span>
+        <div class="body-text">
+          ゼンショーのレストラン部門は、業態ごとの<b>担当者別</b>にアプローチする。
+          <span class="sub">まず部門の責任者を訪問し、その後業態ごとに展開します。</span>
+        </div>
+      </div>
+      <div class="notice">
+        <span class="tag">AI・受託</span>
+        <div class="body-text">
+          顧客システムへの<b>入力代行</b>や<b>遠隔支援サービス</b>は、積極的に受託・営業する。
+          <span class="sub">kintoneへの案件自動登録・見積もりをテスト中。インターネット電話＋文字起こしも検討中です。</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><span class="idx">02</span><h2>部署別ハイライト</h2></div>
+    <p class="lede">10月の活動と、本日報告のあった主な動き。</p>
+    <div class="dept-grid">
+      <div class="dept-card">
+        <div class="dept-top"><span class="dept-name">西日本支社</span><span class="pill good">行動量 増</span></div>
+        <ul>
+          <li>10月の訪問17件で確定。休眠顧客の掘り起こしで復活顧客・50万円超の案件も</li>
+          <li>鳥貴族の天井点検は約6〜7割。進捗は松井支社長に確認</li>
+          <li>ザイマックス関西：公共施設の小規模修繕で声がかかる体制</li>
+          <li>11/11 レッドバロン訪問でノベルティの貼り付けを打診</li>
+        </ul>
+      </div>
+      <div class="dept-card">
+        <div class="dept-top"><span class="dept-name">第一事業部</span><span class="pill warn">記入漏れ</span></div>
+        <ul>
+          <li>快活フロンティアの定例分がリストに未記入。記録はすぐ復元・入力</li>
+          <li>ウェルパーク140店舗の調査が進行中</li>
+          <li>ベルク：受付委託の3店舗テスト、12月〜2月頃開始で調整</li>
+          <li>RIZAP：エアコン洗浄、対象100〜300店舗・獲得30%想定</li>
+        </ul>
+      </div>
+      <div class="dept-card">
+        <div class="dept-top"><span class="dept-name">関東第2課</span><span class="pill bad">目安の半分</span></div>
+        <ul>
+          <li>訪問はリスト7件・Gridy3件で、目安（月14件）に届かず</li>
+          <li>すかいらーく：店舗の環境改善のオンラインミーティングを実施</li>
+          <li>グリーンハウスフーズ等の重点顧客へ定期訪問、日程を12/9までに入力</li>
+        </ul>
+      </div>
+      <div class="dept-card">
+        <div class="dept-top"><span class="dept-name">関東第3課</span><span class="pill good">案件化見込み</span></div>
+        <ul>
+          <li>10月は6件（ヤオコー・グローバルキッズ・すき家定例など）</li>
+          <li>ゼンショーのファストとQSRを別々にアポ、11/13に両方とも案件化できそう</li>
+          <li>ゼンショーのレストラン部門は今月中にアポイント</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><span class="idx">03</span><h2>注意したい顧客</h2></div>
+    <div class="notice-list">
+      <div class="notice">
+        <span class="tag">プレナス<br>グロービート</span>
+        <div class="body-text">
+          進捗報告の不足・見積もりの遅れで、<b>他社に依頼が流れている</b>。直近の挽回は難しい見通し。
+          <span class="sub">対応方法を見直したうえで、年明け頃に改めて訪問します。プレナスで予定していた店舗改装（300万円前後）も対応を検討中です。</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><span class="idx">04</span><h2>宿題</h2></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>担当</th><th>アクション</th><th>期限</th></tr></thead>
+        <tbody>
+          <tr><td>西日本（吉田）</td><td>鳥貴族 天井点検の進捗を確認し全体共有</td><td class="due">11/25</td></tr>
+          <tr><td>西日本（吉田）</td><td>レッドバロンでシール・マグネットの貼り付け可否を打診</td><td class="due">11/11</td></tr>
+          <tr><td>鈴木さん</td><td>西日本支社へのカレンダー配送状況を確認</td><td class="due">11/10</td></tr>
+          <tr><td>第一事業部</td><td>快活フロンティアの訪問記録を復元・入力</td><td class="due">速やかに</td></tr>
+          <tr><td>第一事業部1課</td><td>RIZAP エアコン洗浄の対象店舗リストを確認</td><td class="due">11/11</td></tr>
+          <tr><td>関東第2課ほか</td><td>重点顧客の訪問日程を入力</td><td class="due">12/9 13:00</td></tr>
+          <tr><td>関東第2課</td><td>重点顧客の一覧を改めて詰める</td><td class="due">次回</td></tr>
+          <tr><td>関東第3課</td><td>ゼンショー（ファスト・QSR）訪問と案件化</td><td class="due">11/13</td></tr>
+          <tr><td>関東第3課</td><td>ゼンショー レストラン部門へアポイント・初回訪問</td><td class="due">11月中</td></tr>
+          <tr><td>各課</td><td>遠隔支援サービスの説明会に参加（任意）</td><td class="due">11/17 14:00</td></tr>
+          <tr><td>各課長</td><td>若手3名の担当顧客への挨拶（カレンダー配布時）</td><td class="due">年内</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <span>株式会社アネシス — 社内共有資料（Internal Use Only）</span>
+    <span>作成：水澤　／　次回集計日：12月10日</span>
+  </footer>
+
+</div>
+
+</body>
+</html>
